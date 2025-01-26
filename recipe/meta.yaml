@@ -15,12 +15,12 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} {{ RECIPE_DIR | replace('\\\\', '/') }}/build_starter.py {{ repo }} {{ author }}
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - gym
     - gym-atari
@@ -29,7 +29,7 @@ requirements:
     - numpy
     - pandas
     - psutil
-    - python >=3.6
+    - python >={{ python_min }}
     - tensorflow <2
     - scikit-learn
 
@@ -37,6 +37,7 @@ test:
   requires:
     - pip
     - pytest
+    - python {{ python_min }}
   commands:
     - pip check
     # see run_test.py for checks for:
